@@ -1,6 +1,6 @@
 import { BreedById, BreedEntity, BreedRepository } from '../..';
 
-export class CatUseCases {
+export class BreedUseCases {
   constructor(private readonly breedRepository: BreedRepository) {}
 
   async getBreeds(): Promise<BreedEntity[]> {

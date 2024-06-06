@@ -1,15 +1,16 @@
 import { Router } from "express";
 import { ImagesController } from "./controller";
+import { ImagesDatasourceImpl } from "../../infrastructure/datasources/images.datasource.impl";
+import { ImagesRepositoryImpl } from "../../infrastructure";
 
 export class ImagesRoutes {
   static get routes(): Router {
     const router = Router();
 
-    // const datasource = new AuthDatasourceImpl();
-    // const authRepository = new AuthRepositoryImpl(datasource);
+    const datasource = new ImagesDatasourceImpl();
+    const imagesRepository = new ImagesRepositoryImpl(datasource);
 
-    // const authController = new AuthController(authRepository);
-    const imagesController = new ImagesController();
+    const imagesController = new ImagesController(imagesRepository);
 
     console.debug('[ImagesRoute::create] Creating Images route');
 
