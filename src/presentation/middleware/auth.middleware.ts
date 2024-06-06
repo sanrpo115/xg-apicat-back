@@ -5,8 +5,6 @@ import { JwtAdapter } from '../../config';
 
 export class AuthMiddleware {
 
-  private static readonly API_KEY:string = envs.API_KEY;
-
   static validateJWT = async(req: Request, res: Response, next: NextFunction ) => {
 
     const authorization = req.header('x-api-key');

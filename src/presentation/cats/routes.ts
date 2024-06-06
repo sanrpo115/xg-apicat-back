@@ -1,8 +1,6 @@
-import { Response, Request, Router } from 'express';
+import { Router } from 'express';
 import { BreedDatasourceImpl, BreedRepositoryImpl } from '../../infrastructure';
-import { AuthMiddleware } from '../middleware/auth.middleware';
 import { CatController } from './controller';
-import { AuthController } from '../auth/controller';
 
 export class CatRoutes {
   static get routes(): Router {
@@ -19,8 +17,6 @@ export class CatRoutes {
     router.get('/breeds/search', catController.searchBreeds )
     router.get('/breeds/:breed_id', catController.getBreedById )
     
-    // router.get('/', [AuthMiddleware.validateJWT], authController.getUsers );
-
     return router;
   }
 

@@ -13,8 +13,6 @@ export class AppRoutes {
     router.use('/api', CatRoutes.routes);
     router.use('/api/images', ImagesRoutes.routes);
 
-    // router.use('/api/imagesbybreedid');
-
     return router;
   }
 }
