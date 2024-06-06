@@ -1,4 +1,5 @@
 import express, { Router } from 'express';
+const cors = require('cors');
 
 interface Options {
   port?: number,
@@ -17,7 +18,16 @@ export class Server {
   }
 
   async start () {
+    this.app.use(cors());
+
+    const corsOptions = {
+      origin: 'http://localhost4200.com',
+      methods: 'GET,POST',
+      allowedHeaders: 'Content-Type,Authorization, x-api-key'
+    };
+    
     this.app.use(express.json());
+    this.app.use(cors(corsOptions));
     this.app.use(this.routes);
 
     this.app.listen(this.port, () => {
