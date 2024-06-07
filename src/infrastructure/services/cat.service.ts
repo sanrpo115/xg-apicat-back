@@ -3,15 +3,9 @@ import { envs } from "../../config";
 export class CatService {
   
   private readonly url: string = envs.API_URL;
-  private readonly api_key: string = envs.API_KEY;
 
   async getBreeds()  {
-    const response = await fetch(`${this.url}/breeds`, {
-      headers: {
-        'x-api-key': this.api_key,
-        'Content-Type': 'application/json'
-      }
-    });
+    const response = await fetch(`${this.url}/breeds`);
 
     if (!response.ok) {
       throw new Error(`Error fetching breeds: ${response.statusText}`);
@@ -27,16 +21,10 @@ export class CatService {
   }
 
   async getBreedById(breed_id: string) {
-    const response = await fetch(`${this.url}/breeds/${breed_id}`, {
-      headers: {
-        'x-api-key': this.api_key,
-        'Content-Type': 'application/json'
-      }
-    });
+    const response = await fetch(`${this.url}/breeds/${breed_id}`);
     if (!response.ok) {
-      let msg = `Error fetching breeds: ID "${breed_id}" don't exists`;
-      console.log(msg)
-      throw new Error(msg);
+      let msg = `Error: ID "${breed_id}" don't exists`;
+      throw ({ status: response.status, message: msg, endpoint: response.url });
     }
 
     const data = await response.json();

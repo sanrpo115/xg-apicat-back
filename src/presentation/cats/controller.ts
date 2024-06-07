@@ -1,28 +1,27 @@
 import { Request, Response } from 'express';
-import { BreedRepository } from '../../domain';
+import { BreedRepository, CustomError } from '../../domain';
 
 export class CatController {
   constructor(
-    private readonly breedRepository: BreedRepository,
+    private readonly breedRepository: BreedRepository
   ) {}
   
   getBreeds = async (_: Request, res: Response ): Promise<any> => {
     try {
       const breeds = await this.breedRepository.getBreeds()
-      console.log(breeds.length);
-      res.json(breeds);
+      console.log(`Se encontraron ${breeds.length} resultados`);
+      res.status(200).json(breeds);
     } catch (error: any) {
-      res.status(500).json({ error: error.message });
+      res.json({ error: CustomError.internalServer(error.message) });
     }
   }
-
+      
   getBreedById = async (req: Request, res: Response): Promise<any> => {
     try {
       const breed = await this.breedRepository.getBreedById(req.params.breed_id);
-      console.log(breed);
-      res.json(breed);
+      res.status(200).json(breed);
     } catch (error: any) {
-      res.status(500).json({ error: error.message });
+      res.status(error.statusCode).json({ error: error.message });
     }
   };
   
@@ -32,7 +31,7 @@ export class CatController {
       const img: string = req.query.attach_image as string;
 
       const data = await this.breedRepository.searchBreeds(name, img);
-      res.json(data);
+      res.status(200).json(data);
     } catch (error: any) {
       res.status(500).json({ error: error.message });
     }

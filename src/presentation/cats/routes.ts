@@ -9,14 +9,14 @@ export class CatRoutes {
     const datasource = new BreedDatasourceImpl();
     const breedRepository = new BreedRepositoryImpl(datasource);
 
-    const catController = new CatController(breedRepository);
+    const controller = new CatController(breedRepository);
 
     console.debug('[BreedsRoute::create] Creating Breeds route');
 
-    router.get('/breeds', catController.getBreeds )
-    router.get('/breeds/search', catController.searchBreeds )
-    router.get('/breeds/:breed_id', catController.getBreedById )
-    
+    router.get('/breeds', controller.getBreeds )
+    router.get('/breeds/search', controller.searchBreeds )
+    router.get('/breeds/:breed_id', controller.getBreedById )
+
     return router;
   }
 

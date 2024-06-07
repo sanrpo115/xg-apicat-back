@@ -11,9 +11,13 @@ export class ImagesDatasourceImpl implements ImagesDatasource {
     try {
       const response = await this.imagesService.getImagesByBreedId(image_id);
       return response;
-    } catch (err) {
-      console.log(err);
-      throw CustomError.internalServer();
+    } catch (err: any) {
+      console.error(`Error:`, err);
+      if (err.status === 400) {
+        throw CustomError.badRequest(err.message);
+      } else {
+        throw CustomError.internalServer();
+      }
     }
   }
 

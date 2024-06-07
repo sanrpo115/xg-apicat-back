@@ -22,7 +22,6 @@ export class BreedDatasourceImpl implements BreedDatasource {
       const response = await this.catService.searchBreeds(name, img);
       return response;
     } catch (err) {
-      console.log(err);
       throw CustomError.internalServer();
     }
   }
@@ -31,9 +30,13 @@ export class BreedDatasourceImpl implements BreedDatasource {
     try {
       const response = await this.catService.getBreedById(breed_id);
       return response;
-    } catch (err) {
-      console.log(err);
-      throw CustomError.internalServer();
+    } catch (err: any) {
+      console.error(`Error:`, err);
+      if (err.status === 400) {
+        throw CustomError.badRequest(err.message);
+      } else {
+        throw CustomError.internalServer();
+      }
     }
   }
 
