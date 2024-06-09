@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import { UserModel } from '../../data/mongodb/models/user.model';
-import { envs } from '../../config/envs';
 import { JwtAdapter } from '../../config';
 
 export class AuthMiddleware {

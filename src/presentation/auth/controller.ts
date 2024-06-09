@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { AuthRepository, CustomError, LoginUser, LoginUserDto, RegisterUser, RegisterUserDto } from '../../domain';
-import { UserModel } from '../../data/mongodb';
 
 export class AuthController {
 
@@ -13,7 +12,7 @@ export class AuthController {
       return res.status(error.statusCode).json({ error: error.message });
     }
 
-    console.log(error); // Winston
+    console.log(error);
     return res.status(500).json({ error: 'Internal Server Error' });
   }
 
@@ -35,16 +34,6 @@ export class AuthController {
       .execute( loginUserDto! )
       .then( data => res.json(data) )
       .catch( error => this.handleError(error, res) );
-  }
-
-  getUsers = (req: Request, res: Response ) => {
-    UserModel.find()
-      .then( users => {
-        res.json({
-          user: req.body.user
-        }) 
-      })
-      .catch(()=> res.status(500).json({ error: 'Internal server error' }))
   }
 
 }

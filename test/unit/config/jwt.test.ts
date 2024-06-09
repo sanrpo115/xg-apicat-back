@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-import { JwtAdapter } from '../../src/config';
+import { JwtAdapter } from '../../../src/config';
 
 jest.mock('jsonwebtoken');
 
@@ -9,6 +9,7 @@ describe('JwtAdapter', () => {
   const JWT_SEED = 'XpertGroup';
 
   describe('generateToken', () => {
+    
     it('should generate a token', async () => {
       const signMock = jest.spyOn(jwt, 'sign').mockImplementation((payload, secret, options, callback) => {
         callback(null, token);
@@ -34,9 +35,11 @@ describe('JwtAdapter', () => {
 
       signMock.mockRestore();
     });
+
   });
 
   describe('validateToken', () => {
+    
     it('should validate a token and return the decoded payload', async () => {
       const decodedPayload = { userId: 1 };
       const verifyMock = jest.spyOn(jwt, 'verify').mockImplementation((token, secret, callback) => {
@@ -63,5 +66,7 @@ describe('JwtAdapter', () => {
 
       verifyMock.mockRestore();
     });
+
   });
+  
 });

@@ -1,5 +1,5 @@
 import { compareSync, hashSync } from "bcryptjs";
-import { BcryptAdapter } from "../../src/config";
+import { BcryptAdapter } from "../../../src/config";
 
 jest.mock('bcryptjs', () => ({
   hashSync: jest.fn(),

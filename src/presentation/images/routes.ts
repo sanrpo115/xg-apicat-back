@@ -16,8 +16,6 @@ export class ImagesRoutes {
 
     router.get('/imagesbybreedid/:image_id', imagesController.getImagesByBreedId )
     
-    // router.get('/', [AuthMiddleware.validateJWT], authController.getUsers );
-
     return router;
   }
 
