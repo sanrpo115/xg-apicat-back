@@ -30,7 +30,7 @@ export class LoginUser implements LoginUserUseCase {
 
     const user = await this.authResository.login(loginUserDto);
 
-    const token = await this.signToken({ id: user.id }, '2h');
+    const token = await this.signToken({ id: user.id, name: user.name, email: user.email }, '2h');
     if ( !token ) throw CustomError.internalServer('Error generating token');
 
     return {

@@ -21,7 +21,7 @@ export class AuthDatasourceImpl implements AuthDatasource {
       if ( !user ) throw CustomError.badRequest('User does not exists - email');
 
       const isMatching = this.comparePassword(password, user.password);
-      if ( !isMatching ) throw CustomError.badRequest('Password is not valid');
+      if ( !isMatching ) throw CustomError.badRequest('User and/or Password is not valid');
 
       return UserMapper.userEntityFromObject(user);
 

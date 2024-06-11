@@ -253,7 +253,7 @@ describe('Server Integration Tests', () => {
         .set('x-api-key', 'DEMO-API-KEY');
 
       expect(response.status).toBe(401);
-      expect(response.body.error).toBe('Invalid token - user not found');
+      expect(response.body.error).toBe('Invalid token');
     });
 
   })

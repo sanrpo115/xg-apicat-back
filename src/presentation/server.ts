@@ -21,9 +21,9 @@ export class Server {
     this.app.use(cors());
 
     const corsOptions = {
-      origin: 'http://localhost4200.com',
-      methods: 'GET,POST',
-      allowedHeaders: 'Content-Type,Authorization, x-api-key'
+      origin: 'http://localhost:4200',
+      methods: 'GET, POST',
+      allowedHeaders: 'Content-Type, Authorization, x-api-key'
     };
     
     this.app.use(express.json());

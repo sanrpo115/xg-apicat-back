@@ -28,7 +28,7 @@ export class CatService {
     }
 
     const data = await response.json();
-    const filteredData = data.id === breed_id ? { id: data.id, name: data.name } : { id: null, name: null};
+    const filteredData = data.id === breed_id ? data : { statusCode: 404, message: 'Data not available'};
     return filteredData;
   }
 

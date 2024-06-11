@@ -29,7 +29,7 @@ export class RegisterUser implements RegisterUserUseCase {
 
     const user = await this.authResository.register(registerUserDto);
 
-    const token = await this.signToken({ id: user.id }, '2h');
+    const token = await this.signToken({ id: user.id, name: user.name, email: user.email }, '2h');
     if ( !token ) throw CustomError.internalServer('Error generating token');
 
     return {
